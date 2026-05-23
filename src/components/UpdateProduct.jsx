@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axios from "../axios";
 
 const UpdateProduct = () => {
   const { id } = useParams();
@@ -22,14 +22,14 @@ const UpdateProduct = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `https://shoppee-backend.up.railway.app/api/product/${id}`
+          `/product/${id}`
         );
 
         setProduct(response.data);
         setUpdateProduct(response.data);
       
         const responseImage = await axios.get(
-          `https://shoppee-backend.up.railway.app/api/product/${id}/image`,
+          `/product/${id}/image`,
           { responseType: "blob" }
         );
         const imageFile = await converUrlToFile(
@@ -71,7 +71,7 @@ const UpdateProduct = () => {
 
   console.log("formData : ", updatedProduct)
     axios
-      .put(`https://shoppee-backend.up.railway.app/api/product/${id}`, updatedProduct, {
+      .put(`/product/${id}`, updatedProduct, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
