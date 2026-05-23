@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../axios";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -33,8 +33,7 @@ const AddProduct = () => {
       new Blob([JSON.stringify(product)], { type: "application/json" })
     );
 
-    axios
-      .post("https://shoppee-backend.up.railway.app/api/product", formData, {
+    axios.post("/product", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
